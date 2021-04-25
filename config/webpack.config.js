@@ -169,7 +169,8 @@ module.exports = function (webpackEnv) {
       : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
-    entry:
+    entry: [
+      `${paths.appSrc}/asset/scss/global.scss`,
       isEnvDevelopment && !shouldUseReactRefresh
         ? [
             // Include an alternative client for WebpackDevServer. A client's job is to
@@ -194,6 +195,7 @@ module.exports = function (webpackEnv) {
             // changing JS code would still trigger a refresh.
           ]
         : paths.appIndexJs,
+    ],
     output: {
       // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
@@ -509,8 +511,24 @@ module.exports = function (webpackEnv) {
                     ? shouldUseSourceMap
                     : isEnvDevelopment,
                 },
-                'sass-loader'
-              ),
+              ).concat([
+                {
+                  loader: require.resolve('sass-loader')
+                  // options: {
+                  //   additionalData: "@import 'global.scss';",
+                  //   sourceMap: isEnvProduction && shouldUseSourceMap,
+                  //   sassOptions: {
+                  //     includePaths: [paths.appSrc + '/asset/scss'],
+                  //   },
+                  // },
+                },
+                {
+                  loader: 'sass-resources-loader',
+                  options: {
+                    resources: `${paths.appSrc}/asset/scss/helper/**/*.scss`
+                  }
+                }
+              ]),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.
@@ -529,10 +547,38 @@ module.exports = function (webpackEnv) {
                     : isEnvDevelopment,
                   modules: {
                     getLocalIdent: getCSSModuleLocalIdent,
+                    localIdentName: '[local]__[hash:base64:5]'
                   },
                 },
-                'sass-loader'
+              ).concat(
+                {
+                  loader: require.resolve('sass-loader')
+                  // options: {
+                  //   additionalData: "@import 'global.scss';",
+                  //   sourceMap: isEnvProduction && shouldUseSourceMap,
+                  //   sassOptions: {
+                  //     includePaths: [paths.appSrc + '/asset/scss'],
+                  //   },
+                  // },
+                },
+                {
+                  loader: 'sass-resources-loader',
+                  options: {
+                    resources: `${paths.appSrc}/asset/scss/helper/**/*.scss`
+                  }
+                }
               ),
+            },
+            {
+              test: /\.svg$/,
+              issuer: /\.(js|jsx|tsx|mdx)$/,
+              include: /svg/,
+              exclude: /node_modules/,
+              use: ['@svgr/webpack']
+            },
+            {
+              test: /\.svg$/,
+              loader: 'url-loader'
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
@@ -545,7 +591,7 @@ module.exports = function (webpackEnv) {
               // its runtime that would otherwise be processed through "file" loader.
               // Also exclude `html` and `json` extensions so they get processed
               // by webpacks internal loaders.
-              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              exclude: [/\.(js|mjs|jsx|ts|tsx|mdx)$/, /\.html$/, /\.json$/],
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
@@ -718,7 +764,7 @@ module.exports = function (webpackEnv) {
           extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
           formatter: require.resolve('react-dev-utils/eslintFormatter'),
           eslintPath: require.resolve('eslint'),
-          failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+          emitWarning: isEnvDevelopment && emitErrorsAsWarnings,
           context: paths.appSrc,
           cache: true,
           cacheLocation: path.resolve(
