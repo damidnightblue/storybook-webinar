@@ -1,0 +1,94 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import GlobalButton from './index';
+import EN from '../../lang/en.json';
+import ES from '../../lang/es.json';
+import FR from '../../lang/fr.json';
+import KR from '../../lang/kr.json';
+import ZH from '../../lang/zh.json';
+
+<Meta
+  title='Component/GlobalButton'
+  component={GlobalButton}
+  argTypes={{
+    ...GlobalButtonArgTypes
+  }}
+/>
+
+export const Template = (args, { globals: { locale } }) => {
+  const caption = getCaptionForLocale(locale);
+  args = {
+    ...args,
+    label: caption
+  }
+  return <GlobalButton {...args} />
+};
+
+export const GlobalButtonArgTypes = {
+  type: {
+    control: {
+      type: 'select',
+      options: ['default', 'primary', 'warning']
+    },
+    table: {
+      type: {
+        summary: 'string',
+        detail: 'default, primary, warning'
+      }
+    }
+  },
+  onClick: {
+    dfaultValue: null,
+    description: '`Actions` 참고',
+    table: {
+      type: {
+        summary: 'function',
+        detail: '(e: MouseEvent<HTMLButtonElement>) => void;'
+      }
+    },
+    control: { disable: true },
+    action: 'onClick function'
+  },
+  onMouseOver: {
+    dfaultValue: null,
+    description: '`Actions` 참고',
+    table: {
+      type: {
+        summary: 'function',
+        detail: '(e: MouseEvent<HTMLButtonElement>): void;'
+      }
+    },
+    control: { disable: true }
+  }
+};
+
+
+export const getCaptionForLocale = (locale) => {
+  switch(locale) {
+    case 'es': return ES.msg.hello;
+    case 'fr': return FR.msg.hello;
+    case 'kr': return KR.msg.hello;
+    case 'zh': return ZH.msg.hello;
+    default:
+      return EN.msg.hello;
+  }
+}
+
+# 글로벌 버튼 (GlobalButton)
+
+## props
+
+<ArgsTable of={GlobalButton} />
+
+## 기본 화면
+
+<Canvas>
+  <Story
+    name='basic'
+    args={{
+      label: 'button'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

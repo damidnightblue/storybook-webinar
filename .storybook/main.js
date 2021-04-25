@@ -8,7 +8,7 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    // './svg-viewer-custom-addon/register.js', // TODO: 체크
+    './svg-viewer-custom-addon/register.js'
   ],
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
@@ -80,7 +80,7 @@ module.exports = {
     });
 
     const fileLoaderRule = config.module.rules.find(
-      rule => !Array.isArray(rule.test) && rule.test.test('.svg')
+      (rule) => !Array.isArray(rule.test) && rule.test.test('.svg')
     );
     fileLoaderRule.exclude = /\.svg$/;
 

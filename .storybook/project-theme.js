@@ -1,31 +1,29 @@
-// https://storybook.js.org/docs/react/configure/theming
-
 import { create } from '@storybook/theming/create';
 
 export default create({
-  base: 'dark', // or 'dark'
+  base: 'light', // or 'dark'
 
-  colorPrimary: '#333',
-  colorSecondary: 'deepskyblue',
+  // colorPrimary: 'hotpink',
+  // colorSecondary: 'deepskyblue',
 
   // UI
-  appBg: '#2a2a2a',
-  appContentBg: '#2a2a2a',
-  appBorderColor: 'black',
+  // appBg: 'white',
+  // appContentBg: 'silver',
+  // appBorderColor: 'grey',
   appBorderRadius: 4,
 
   // Typography
-  fontBase: '"Open Sans", sans-serif',
-  fontCode: 'monospace',
+  // fontBase: '"Open Sans", sans-serif',
+  // fontCode: 'monospace',
 
   // Text colors
-  textColor: 'white',
+  textColor: 'black',
   textInverseColor: 'rgba(255,255,255,0.9)',
 
   // Toolbar default and active colors
   barTextColor: 'silver',
-  barSelectedColor: 'deepskyblue',
-  barBg: '#333',
+  barSelectedColor: 'black',
+  // barBg: 'hotpink',
 
   // Form colors
   inputBg: 'white',
@@ -33,6 +31,6 @@ export default create({
   inputTextColor: 'black',
   inputBorderRadius: 4,
 
-  brandTitle: 'Storybook study',
-  // brandImage: 'https://placehold.it/350x150',
+  brandTitle: 'Storybook webinar'
+  // brandImage: './src/asset/images/logo.png',
 });

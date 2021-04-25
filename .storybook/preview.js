@@ -11,9 +11,9 @@ addParameters({
         ? 0
         : a[1].id.localeCompare(b[1].id, undefined, { numeric: true }),
     showPanel: true,
-    panelPosition: 'bottom',
+    panelPosition: 'bottom'
   },
-  docs: { page: null },
+  docs: { page: null }
 });
 
 const customViewports = {
@@ -24,18 +24,18 @@ const customViewports = {
       height: '812px'
     }
   },
-  kindleFire2: {
-    name: 'Kindle Fire 2',
+  galaxyS21: {
+    name: 'Galaxy S21',
     styles: {
-      width: '600px',
-      height: '963px'
+      width: '384px',
+      height: '854px'
     }
   },
   kindleFireHD: {
-    name: 'Kindle Fire HD',
+    name: 'iPad',
     styles: {
-      width: '533px',
-      height: '801px'
+      width: '768px',
+      height: '1024px'
     }
   }
 };
@@ -52,23 +52,23 @@ export const parameters = {
   },
   viewport: { viewports: customViewports },
   backgrounds: {
-    default: 'light',
+    default: 'light theme',
     values: [
       {
-        name: 'light',
+        name: 'light theme',
         value: '#fff'
       },
       {
-        name: 'dark',
-        value: 'rgba(0,0,0,0.8)'
+        name: 'dark theme',
+        value: '#000'
       },
       {
-        name: 'twitter',
-        value: '#00aced'
+        name: 'blue theme',
+        value: 'cornflowerblue'
       },
       {
-        name: 'facebook',
-        value: '#3b5998'
+        name: 'gray theme',
+        value: 'dimgray'
       }
     ]
   },
@@ -76,34 +76,8 @@ export const parameters = {
     argTypesRegex: '^on.*'
   }
 };
-// .storybook/preview.js
-
-// export const globalTypes = {
-//   theme: {
-//     name: 'Theme',
-//     description: 'Global theme for components',
-//     defaultValue: 'light',
-//     toolbar: [
-//       {
-//         icon: 'circlehollow',
-//         // array of plain string values or MenuItem shape (see below)
-//         items: ['light', 'dark'],
-//       },
-//     ],
-//   },
-// };
 
 export const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Global theme for components',
-    defaultValue: 'light',
-    toolbar: {
-      icon: 'circlehollow',
-      // array of plain string values or MenuItem shape (see below)
-      items: ['light', 'dark']
-    }
-  },
   locale: {
     name: 'Locale',
     description: 'locale',
@@ -111,10 +85,11 @@ export const globalTypes = {
     toolbar: {
       icon: 'globe',
       items: [
-        { value: 'en', right: '🇺🇸', title: 'English' },
-        { value: 'fr', right: '🇫🇷', title: 'Français' },
-        { value: 'zh', right: '🇨🇳', title: '中文' },
-        { value: 'kr', right: '🇰🇷', title: '한국어' }
+        { value: 'kr', right: '🇰🇷', title: '한국어' },
+        { value: 'en', right: '🇺🇸', title: '영어' },
+        { value: 'fr', right: '🇫🇷', title: '프랑스어' },
+        { value: 'zh', right: '🇨🇳', title: '중국어' },
+        { value: 'es', right: '🇪🇸', title: '스페인어' }
       ]
     }
   }

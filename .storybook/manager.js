@@ -3,9 +3,11 @@ import { themes } from '@storybook/theming';
 import projectTheme from './project-theme';
 
 addons.setConfig({
-  showRoots: true,
+  sidebar: {
+    showRoots: true
+  },
   theme: projectTheme,
-  selectedPanel: 'component-button--basic', // or undefined
+  selectedPanel: 'component-button--basic', // 실행시 처음 선택되는 스토리 선택
   isFullscreen: false,
   showNav: true,
   showPanel: true,
@@ -13,5 +15,5 @@ addons.setConfig({
   sidebarAnimations: true,
   enableShortcuts: true,
   isToolshown: true,
-  initialActive: 'sidebar',
+  initialActive: 'sidebar'
 });
