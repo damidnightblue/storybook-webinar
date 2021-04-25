@@ -1,0 +1,47 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import Header from './index';
+
+<Meta
+  title='Component/Header'
+  component={Header}
+  argTypes={{ ...HeaderArgTypes }}
+/>
+
+export const Template = (args) => <Header {...args} />;
+export const HeaderArgTypes = {
+  themeCode: {
+    control: {
+      type: 'select',
+      options: ['type_a', 'type_b', 'type_c']
+    }
+  }
+};
+
+# 헤더 (Header)
+
+Header 컴포넌트 입니다.
+
+Header 컴포넌트는 3개의 테마로 작업되었습니다.
+
+## type_a
+
+<Canvas>
+  <Story name='type_a'>{Template.bind({})}</Story>
+</Canvas>
+
+## type_b
+
+<Canvas>
+  <Story name='type_b' args={{ themeCode: 'type_b' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## type_c
+
+<Canvas>
+  <Story name='type_c' args={{ themeCode: 'type_c' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

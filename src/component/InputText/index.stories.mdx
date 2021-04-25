@@ -1,0 +1,33 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { action } from '@storybook/addon-actions';
+import InputText from './index';
+
+<Meta
+  title='Component/InputText'
+  component={InputText}
+  parameters={{ actions: { argTypesRegex: '^on.*' } }}
+/>
+
+export const Template = (args) => <InputText {...args} />;
+
+# 검색어 입력 (InputText)
+
+## props
+
+<ArgsTable of={InputText} />
+
+## 기본 화면
+
+<Canvas>
+  <Story name='basic'>{Template.bind({})}</Story>
+</Canvas>
+
+## 검색 비활성화
+
+검색어 입력이 불가하며, 마우스 커서 모양이 바뀝니다.
+
+<Canvas>
+  <Story name='disabled' args={{ disabled: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

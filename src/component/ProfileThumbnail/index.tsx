@@ -12,16 +12,16 @@ export interface ProfileThumbnailProps {
 
 const ProfileThumbnail = ({ thumbnailUrl, alt }: ProfileThumbnailProps) => (
   <>
-    <a href="/" className={style.profile_thumbnail}>
+    <a href='/' className={style.profile_thumbnail}>
       {thumbnailUrl && (
         <img
-          src={IconPlaceholder}
+          src={thumbnailUrl}
           className={style.profile_thumbnail_image}
           alt={alt ? alt : ''}
         />
       )}
       {!thumbnailUrl && (
-        <span className={style.no_image} aria-label="username" />
+        <span className={style.no_image} aria-label='username' />
       )}
     </a>
   </>
